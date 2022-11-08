@@ -87,7 +87,7 @@ function toggle() {
     $.get("https://localhost:7220/api/Polyline/getall",
         function (data, status) {
             data.forEach(element => {
-                t.row.add([element.number, element.name]).draw(false);
+                t.row.add([element.number, element.name,element.polyline]).draw(false);
             });
         });
     $('#popup').show();

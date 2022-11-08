@@ -43,13 +43,13 @@
         </ul>
     </div>
     <div id="map" class="map"></div>
+
     <div id="popup" class="modal">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div class="modal-content" style="width:550px;">
                 <div class="modal-header">
                     <h5 class="modal-title">Line List</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                        onclick="toggleCancel()">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="toggleCancel()">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -59,6 +59,7 @@
                             <tr>
                                 <th>Number</th>
                                 <th>Name</th>
+                                <th>Polyline</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,6 +68,7 @@
                             <tr>
                                 <th>Number</th>
                                 <th>Name</th>
+                                <th>Polyline</th>
                             </tr>
                         </tfoot>
                     </table>
