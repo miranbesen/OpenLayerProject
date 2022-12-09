@@ -7,6 +7,7 @@ namespace Business.Abstract
    
         List<InfoPolyline> GetList();
         bool Add(InfoPolyline polyline);
-        
+        bool Delete(InfoPolyline polyline);
+
     }
 }

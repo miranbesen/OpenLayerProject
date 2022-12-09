@@ -18,6 +18,11 @@ namespace Business.Concrete
            return _polylineDal.Add(polyline);
         }
 
+        public bool Delete(InfoPolyline polyline)
+        {
+            return _polylineDal.Delete(polyline);
+        }
+
         public List<InfoPolyline> GetList()
         {
             return _polylineDal.GetList();

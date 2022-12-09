@@ -31,5 +31,12 @@ namespace WebAPI.Controllers
            return new JsonResult(result);
         }
 
+        [HttpPost(template: "delete")]
+        public ActionResult Delete(InfoPolyline polyline)
+        {
+            var result = _polylineService.Delete(polyline);
+            return new JsonResult(result);
+        }
+
     }
 }

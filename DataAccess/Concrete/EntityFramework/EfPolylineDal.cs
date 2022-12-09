@@ -42,6 +42,33 @@ namespace DataAccess.Concrete.EntityFramework
                 return false;
             }
         }
+        public bool Delete(InfoPolyline polyline)
+        {
+            try
+            {
+
+                workingDirectory += "\\InfoPolyline.json";
+                using (StreamReader sr = new StreamReader(workingDirectory))
+                {
+                    string json = sr.ReadToEnd();
+                    polylineList = JsonConvert.DeserializeObject<List<InfoPolyline>>(json);
+                }
+
+                using (StreamWriter sw = new StreamWriter(workingDirectory))
+                {
+                    polylineList = polylineList ?? new List<InfoPolyline>();
+                    var lastItem = polylineList.LastOrDefault();
+                    polylineList.RemoveAll(i => i.Name == polyline.Name && i.Number == polyline.Number && i.Polyline == polyline.Polyline);
+                    var convertedJson = JsonConvert.SerializeObject(polylineList, Formatting.Indented);
+                    sw.Write(convertedJson);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
         public List<InfoPolyline> GetList()
         {

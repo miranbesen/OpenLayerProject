@@ -7,6 +7,6 @@ namespace DataAccess.Abstract
     {
         bool Add(InfoPolyline polyline);
         List<InfoPolyline> GetList();
-
+        bool Delete(InfoPolyline polyline);
     }
 }
