@@ -3,95 +3,82 @@
 
 <head>
     <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/css/ol.css" type="text/css">
-    <link rel="stylesheet" href="main.css" type="text/css">
+          href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/css/ol.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/build/ol.js"></script>
-    <script type="text/javascript" src="main.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <!-- jsPanel CSS -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/jspanel.css" rel="stylesheet"> -->
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
     <title>Open Layer Project</title>
-</head>
-
-<body>
+    <!-- jsPanel CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/jspanel.css" rel="stylesheet">
     <!-- jsPanel JavaScript -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/jspanel.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/jspanel.js"></script>
 
     <!-- optional jsPanel extensions -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/extensions/modal/jspanel.modal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/extensions/modal/jspanel.modal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/extensions/tooltip/jspanel.tooltip.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/extensions/hint/jspanel.hint.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/extensions/layout/jspanel.layout.js"></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/extensions/contextmenu/jspanel.contextmenu.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/extensions/dock/jspanel.dock.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/extensions/contextmenu/jspanel.contextmenu.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/extensions/dock/jspanel.dock.js"></script>
+</head>
 
-    <div class="menu" id="blur">
-        <ul>
-            <li><a onclick="addDrawing()" href="#">Add Drawing</a></li>
-            <li><a href="#" onclick="toggle()">Query Drawing</a></li>
-        </ul>
-    </div>
-    <div id="map" class="map"></div>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div id="popup" class="modal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="width:550px;">
-                <div class="modal-header">
-                    <h5 class="modal-title">Line List</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="toggleCancel()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table id="example" class="display" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Number</th>
-                                <th>Name</th>
-                                <th>Polyline</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Number</th>
-                                <th>Name</th>
-                                <th>Polyline</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        onclick="toggleCancel()">Close</button>
-                </div>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="QueryDrawing()">Query Drawing</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Add Drawing
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item draw-tools" data-draw-type="Point">Point</a>
+                        <a class="dropdown-item draw-tools" data-draw-type="Line">LineString</a>
+                        <a class="dropdown-item draw-tools" data-draw-type="Poly">Polygon</a>
+                        <a class="dropdown-item draw-tools" data-draw-type="Cancel">None</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="InfoDrawing()">Info Drawing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="DeleteDrawing()">Delete Drawing</a>
+                </li>
+            </ul>
         </div>
-    </div>
+    </nav>
+
+    <div id="map" class="map" style="height:800px;"></div>
+
     <div id="addPopup" class="modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Add Line</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                        onclick="toggleAddCancel()">
+                            onclick="toggleAddCancel2()">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input hidden id="polyline" />
+                    <input hidden id="geometryType" />
                     <div class="form-group">
                         <label for="addPopupNumber">Number</label>
                         <input type="text" class="form-control" id="addPopupNumber"><br><br>
@@ -104,21 +91,50 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="saveLine()">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        onclick="toggleAddCancel()">Close</button>
+                            onclick="toggleAddCancel2()">
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
-        <script>
-            var t = $('#example').DataTable();
-            $(document).ready(function () {
-                getLine();
-            });
+    </div>
 
-            document.addEventListener("DOMContentLoaded", () => {
-                initializeMap();
-                addInteraction();
-            });
-        </script>
+    <div id="InfoPopup" class="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Info Line</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            onclick="toggleInfoCancel()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="infoPopupNumber">Number:</label>
+                        <input id="infoNumber" />
+                    </div>
+                    <div class="form-group">
+                        <label for="infoPopupName">Name:</label>
+                        <input id="infoName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="infoPopupWkt">WKT:</label>
+                        <input id="infoWkt" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            onclick="toggleInfoCancel()">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/elm-pep@1.0.6/dist/elm-pep.js"></script>
+    <script type="text/javascript" src="main.js"></script>
 </body>
 
 </html>
