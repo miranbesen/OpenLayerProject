@@ -38,7 +38,7 @@ initializeMap = () => {
             pointInteraction.setActive(false);
             var format = new ol.format.WKT(),
                 wkt = format.writeGeometry(event.feature.getGeometry());
-            $('#geometryType').val(wkt); //deðere atama yapýyoruz 
+            $('#geometryType').val(wkt); //deï¿½ere atama yapï¿½yoruz 
             $('#addPopupNumber').val('')
             $('#addPopupName').val('')
             $('#addPopup').show();
@@ -90,7 +90,7 @@ initializeMap = () => {
     map.addInteraction(InfoInteraction);
     InfoInteraction.setActive(false);
 }
-var addDrawCount = 0; //Amaç olarak add draw yaparken info drawing e basýlmasýný önlemek.
+var addDrawCount = 0; //Amaï¿½ olarak add draw yaparken info drawing e basï¿½lmasï¿½nï¿½ ï¿½nlemek.
 $("a.draw-tools").on("click", function () {
     addDrawCount = addDrawCount + 1;
     InfoInteraction.setActive(false);
@@ -125,6 +125,7 @@ function InteractionControl(Value) {
 
 function InfoDrawing() {
     if (addDrawCount == 0) {
+        // debugger;
         InfoInteraction.setActive(true);
         InfoInteraction.on("select", function (event) {
             // debugger;
@@ -158,7 +159,7 @@ function openjsPanel(features) { //info drawing icin olan jspanel.
 
         var t = $('#example2').DataTable();
         features.forEach(element => {
-
+            // debugger;
             var format = new ol.format.WKT()
             wkt = format.writeGeometry(element.values_.geometry);
             t.row.add([element.values_.number, element.values_.name, wkt]).draw(false);
@@ -251,12 +252,41 @@ function saveLine() {
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
-                number: $('#addPopupNumber').val(), name: $('#addPopupName').val(), polyline: $('#geometryType').val()
+                number: $('#addPopupNumber').val(), name:
+                    $('#addPopupName').val(), polyline: $('#geometryType').val()
             }),
             dataType: 'json'
         }).done(function (data) {
             getLine();
             toggleAddCancel1();
+        });
+    }
+}
+function DeleteDrawing() {
+    if (addDrawCount == 0) {
+        // debugger;
+        InfoInteraction.setActive(true);
+        InfoInteraction.on("select", function (event) {
+            // debugger;
+            event.selected.forEach(element => {
+                var format = new ol.format.WKT()
+                wkt = format.writeGeometry(element.values_.geometry);
+                $.ajax({
+                    url: 'https://localhost:7220/api/Polyline/delete',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        number: element.values_.number, name:
+                        element.values_.name , polyline: wkt
+                    }),
+                    dataType: 'json'
+                }).done(function (data) {
+                    // debugger;
+                    InfoInteraction.setActive(false);
+                    location.reload();
+                  
+                });
+            });
         });
     }
 }
@@ -267,8 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener('jspanelbeforeclose', function (event) {
-
     jspanelCounter = 0;
-    InfoInteraction.setActive(false); //Durmadan info butonuna basmak için yazdýk. 
+    InfoInteraction.setActive(false); //Durmadan info butonuna basmak iï¿½in yazdï¿½k. 
 }, false);
 
